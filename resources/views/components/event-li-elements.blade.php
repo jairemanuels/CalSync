@@ -1,9 +1,12 @@
 <ol class="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8"
     style="grid-template-rows: 1.75rem repeat(288, minmax(0, 1fr)) auto">
-    @foreach ($events as $event)
+
+    @if ($events === null || $events->isEmpty())
+    <!-- No events -->
+        @else
+        @foreach ($events as $event)
         @php
             $grid = $event->calculateGridPosition($event->event_time_start, $event->event_time_end);
-
         @endphp
         <li class="relative mt-px flex sm:col-start-{{ $grid['day'] }}" style="grid-row: {{ $grid['start'] }} / span {{ $grid['span'] }}">
             <a href="#"
@@ -13,5 +16,6 @@
             </a>
         </li>
         @endforeach
+        @endif
 </ol>
 

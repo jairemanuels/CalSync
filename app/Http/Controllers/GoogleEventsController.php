@@ -46,6 +46,7 @@ class GoogleEventsController extends Controller
             }
         }
 
-        redirect('/dashboard');
+        redirect('/week-view');
+        
     }
 }

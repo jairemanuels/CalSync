@@ -98,7 +98,7 @@
             </a>
             <p class="mt-10 text-center text-sm text-gray-500 ">
                 Already a member?
-                <a href="{{ route('/') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Log in</a>
+                <a href="{{ route('week-view') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Log in</a>
             </p>
         </div>
     </div>

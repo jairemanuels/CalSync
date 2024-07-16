@@ -26,14 +26,14 @@ class GoogleAuthController extends Controller
 
         $userProvider = UserProvider::where([
             'provider_name' => $providerName,
-            'provider_id' => $googleUser->getId()
+            'provider_id' => $googleUser->getId(),
         ])->first();
 
         if(!$userProvider) {
            $user = User::create([
                 'email' => $googleUser->getEmail(),
                 'name' => $googleUser->getName(),
-                'password' => Str::random(10),
+                'password' => bcrypt(Str::random(10)),
             ]);
 
             $userProvider = UserProvider::create([
@@ -47,7 +47,7 @@ class GoogleAuthController extends Controller
         }
         Auth::loginUsingId($userProvider->user_id);
 
-        return redirect('/dashboard');
+        return redirect('/week-view');
     }
 }
 
