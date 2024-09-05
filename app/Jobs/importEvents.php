@@ -1,15 +1,36 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Jobs;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use App\Models\Event;
 use Google\Client;
 use Google\Service\Calendar;
-use Google\Service\Calendar\EventDateTime;
-use Illuminate\Http\Request;
 
-class GoogleEventsController extends Controller
+
+class importEvents implements ShouldQueue
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    /**
+     * Create a new job instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
+        $this->importEvents();
+    }
 
     public function importEvents()
     {
@@ -45,8 +66,6 @@ class GoogleEventsController extends Controller
                 ]);
             }
         }
-
-        return redirect('/week-view');
 
     }
 }

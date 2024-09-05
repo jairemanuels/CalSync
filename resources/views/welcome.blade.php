@@ -24,7 +24,7 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" method="POST" action="{{ route('login') }}">
+            <form class="space-y-6" method="POST" action="/login-auth">
                 @csrf
                 <div>
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
@@ -63,7 +63,7 @@
                 </div>
             </form>
 
-            <a href="{{ route('redirect') }}" aria-label="Sign in with Google"
+            <a href="{{ route('google-redirect') }}" aria-label="Sign in with Google"
                 class="flex justify-center my-1.5 items-center bg-white border border-button-border-light rounded-md p-0.5 pr-3 w-full hover:bg-gray-50">
                 <div class="flex items-center justify-center bg-white w-9 h-9 rounded-l">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">

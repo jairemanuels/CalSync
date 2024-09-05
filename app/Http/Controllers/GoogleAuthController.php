@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\importEvents;
 use App\Models\User;
 use App\Models\UserProvider;
 use Illuminate\Http\Request;
@@ -13,14 +14,14 @@ class GoogleAuthController extends Controller
 {
     public function redirect()
     {
-        return Socialite::driver('google')
+        $providerName = 'google';
+        return Socialite::driver($providerName)
         ->scopes(['https://www.googleapis.com/auth/calendar.events'])
         ->redirect();
     }
 
-    public function callback()
+    public function callback(Request $request)
     {
-
         $providerName = 'google';
         $googleUser = Socialite::driver($providerName)->user();
 
@@ -46,6 +47,8 @@ class GoogleAuthController extends Controller
             $userProvider->update(['provider_token' => $googleUser->token]);
         }
         Auth::loginUsingId($userProvider->user_id);
+
+        // importEvents::dispatch();
 
         return redirect('/week-view');
     }
