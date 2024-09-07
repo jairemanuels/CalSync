@@ -15,11 +15,11 @@
 
 <body class="h-full">
 
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="flex flex-col justify-center min-h-full px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-20 w-auto" src="calendar-logo.png" alt="Calendar Logo">
+            <img class="w-auto h-20 mx-auto" src="calendar-logo.png" alt="Calendar Logo">
 
-            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up</h2>
+            <h2 class="mt-10 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Sign up</h2>
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -75,7 +75,7 @@
 
             <a href="{{ route('redirect') }}" aria-label="Sign in with Google"
                 class="flex justify-center my-1.5 items-center bg-white border border-button-border-light rounded-md p-0.5 pr-3 w-full hover:bg-gray-50">
-                <div class="flex items-center justify-center bg-white w-9 h-9 rounded-l">
+                <div class="flex items-center justify-center bg-white rounded-l w-9 h-9">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
                         <title>Sign in with Google</title>
                         <desc>Google G Logo</desc>
@@ -93,12 +93,12 @@
                             class="fill-google-logo-red"></path>
                     </svg>
                 </div>
-                <span class="text-sm text-google-text-gray tracking-wider">Sign in with Google</span>
+                <span class="text-sm tracking-wider text-google-text-gray">Sign in with Google</span>
                 </button>
             </a>
-            <p class="mt-10 text-center text-sm text-gray-500 ">
+            <p class="mt-10 text-sm text-center text-gray-500 ">
                 Already a member?
-                <a href="{{ route('week-view') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Log in</a>
+                <a href="{{ route('login') }}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Log in</a>
             </p>
         </div>
     </div>
