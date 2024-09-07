@@ -2,13 +2,18 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DateController;
+use App\Http\Controllers\User\DeleteAction as UserDeleteAction;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\GoogleEventsController;
+use App\Http\Controllers\ListAction;
 use App\Http\Controllers\User\LoginAction;
 use App\Http\Controllers\User\ListAction as UserListAction;
+use App\Http\Controllers\Calendar\ListAction as CalendarListAction;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UpsertAction as UserUpsertAction;
 use App\Http\Controllers\User\RetrieveAction as UserRetrieveAction;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,7 +46,11 @@ Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect'])->
 
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('callback');
 Route::get('/users/list', UserListAction::class);
-Route::get('users/me', UserRetrieveAction::class);
+Route::get('/users/me', UserRetrieveAction::class);
+Route::get('/users/delete', UserDeleteAction::class);
+Route::get('/users/upsert', UserUpsertAction::class);
+
+Route::get('/calendar/list', CalendarListAction::class);
 
 
 require __DIR__ . '/auth.php';
