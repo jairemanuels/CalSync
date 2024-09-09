@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Calendar;
 use App\Repository\CalendarRepository;
 use App\Repository\UserRepository;
+use DomainException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ListAction extends Controller
+class DeleteAction extends Controller
 {
     public function __construct(
         private CalendarRepository $calendarRepository,
@@ -18,7 +19,15 @@ class ListAction extends Controller
     public function __invoke(
         Request $request,
     ): JsonResponse {
-        $calendars = $this->calendarRepository->all();
-        return new JsonResponse($calendars);
+
+        $id = $request->get('id', 0);
+        $calendar = $this->calendarRepository->find($id);
+
+        if (!$calendar instanceof Calendar) {
+            throw new DomainException('Calendar is not a valid calendar');
+        }
+
+        $this->calendarRepository->delete($calendar);
+        return new JsonResponse($calendar);
     }
 }

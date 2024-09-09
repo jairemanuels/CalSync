@@ -24,28 +24,47 @@ class UpsertAction extends Controller
 
     public function __invoke(
         Request $request,
-    ):JsonResponse {
-
+    ): JsonResponse {
         $id = $request->get('id', 0);
+
         $user = $this->userRepository->find($id);
 
         if (!$user instanceof User) {
             $user = new User();
-            // $user->generateUuid();
+            $user->uuid = $user->generateUuid();
         }
 
-        if ($request->has('name')) {
-            $user->name = $request->get('name');
-
-        if ($request->has('email')) {
-            $user->email = $request->get('email');
-
+        if (!$request->has('name')) {
+            throw new DomainException('Name is not in the request');
         }
+
+        $name = $request->get('name');
+
+        if (
+            is_string($name)
+            && $name !== ''
+        ) {
+            throw new DomainException('User can not have an empty name');
+        }
+
+        if (!$request->has('email')) {
+            throw new DomainException('Email is not in the request');
+        }
+
+        $email = $request->get('email');
+
+        if (
+            is_string($email)
+            && $email !== ''
+        ) {
+            throw new DomainException('User can not have an empty email');
+        }
+
+        $user->name = $name;
+        $user->email = $email;
+
+        $this->userRepository->save($user);
 
         return new JsonResponse($user);
-
-
     }
-
-}
 }
