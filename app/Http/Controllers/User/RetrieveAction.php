@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Repository\UserRepository;
 use DomainException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use InvalidArgumentException;
 
 class RetrieveAction extends Controller

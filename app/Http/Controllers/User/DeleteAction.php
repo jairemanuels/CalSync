@@ -8,7 +8,6 @@ use App\Repository\UserRepository;
 use DomainException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use InvalidArgumentException;
 
 class DeleteAction extends Controller

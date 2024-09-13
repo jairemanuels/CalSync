@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repository\UserRepository;
 use DomainException;
-use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Js;
 
 class UpsertAction extends Controller
 {
@@ -44,7 +41,7 @@ class UpsertAction extends Controller
             is_string($name)
             && $name !== ''
         ) {
-            throw new DomainException('User can not have an empty name');
+            throw new DomainException('Name must be a valid string');
         }
 
         if (!$request->has('email')) {

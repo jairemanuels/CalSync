@@ -5,7 +5,6 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use phpseclib3\Common\Functions\Strings;
 
 class Event extends Model
 {
@@ -18,6 +17,7 @@ class Event extends Model
      */
     protected $fillable = [
         'user_id',
+        'uuid',
         'external_id',
         'name',
         'description',
@@ -28,7 +28,7 @@ class Event extends Model
     function calculateGridPosition($startTime, $endTime)
     {
         $start = Carbon::parse($startTime);
-        $end = Carbon::parse($endTime); 
+        $end = Carbon::parse($endTime);
 
         // Assuming grid starts at 12:00 AM
         $startRow = $start->hour * 12 + ceil($start->minute / 5) + 2; // Each row represents 5 minutes
@@ -45,10 +45,8 @@ class Event extends Model
     static function getEventsByDate($startTime, $endTime)
     {
 
-        $events =  Event::where('event_time_start', '>=', $startTime)
+        return Event::where('event_time_start', '>=', $startTime)
             ->where('event_time_end', '<=', $endTime)
             ->get();
-
-        return $events;
     }
 }

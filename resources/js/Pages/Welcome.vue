@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <a href="#" label="Sign in with Google"
+            <a href="/auth/sso/google/redirect" label="Sign in with Google"
                 class="flex justify-center my-1.5 items-center bg-white border border-button-border-light rounded-md p-0.5 pr-3 w-full hover:bg-gray-50">
                 <div class="flex items-center justify-center bg-white rounded-l w-9 h-9">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">

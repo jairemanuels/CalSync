@@ -13,10 +13,8 @@ class DeleteAction extends Controller
         private EventRepository $eventRepository,
         ) {}
 
-    public function __invoke(
-        Request $request,
-    ): JsonResponse {
-
+    public function __invoke(Request $request): JsonResponse
+    {
         $event = $this->eventRepository->all();
         return new JsonResponse($event);
     }
