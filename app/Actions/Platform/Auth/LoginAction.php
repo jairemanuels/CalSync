@@ -5,6 +5,7 @@ namespace App\Actions\Platform\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+
 class LoginAction
 {
     /**

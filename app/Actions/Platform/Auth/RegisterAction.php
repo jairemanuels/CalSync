@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class RegisterAction
 {
     /**
-     * Handle user login on the platform
+     * Handle user registration on the platform
      *
      * @throws ValidationException
      */
@@ -20,12 +20,16 @@ class RegisterAction
 
         try {
             $validated['password'] = Hash::make($validated['password']);
-            return User::create($validated);
+            $user = User::create($validated);
         } catch (\Exception $e) {
             throw ValidationException::withMessages([
                 'email' => 'Something went wrong, please try again',
             ]);
         }
+
+        // todo: send verification email / welcome email
+
+        return $user;
     }
 
     /**
