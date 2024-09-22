@@ -9,19 +9,11 @@
             </div>
             <div class="card-body">
                 <form role="form" wire:submit="handleRegistration()">
-                    <div class="row">
-                        <div class="mb-3 col-6">
-                            <input type="text" name="first_name" wire:model="first_name" class="form-control form-control-lg @error('first_name') is-invalid @enderror" placeholder="First Name" aria-label="First Name">
-                            @error('first_name')
-                                <p class="text-sm text-danger mt-2">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-3 col-6">
-                            <input type="text" name="last_name" wire:model="last_name" class="form-control form-control-lg @error('last_name') is-invalid @enderror" placeholder="Last Name" aria-label="Last Name">
-                            @error('last_name')
-                                <p class="text-sm text-danger mt-2">{{ $message }}</p>
-                            @enderror
-                        </div>
+                    <div class="mb-3">
+                        <input type="text" name="name" wire:model="name" class="form-control form-control-lg @error('name') is-invalid @enderror" placeholder="Name" aria-label="Name">
+                        @error('name')
+                        <p class="text-sm text-danger mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <input type="email" name="email" wire:model="email" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Email" aria-label="Email">
@@ -58,10 +50,12 @@
         <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
             <img src="/assets/img/shapes/pattern-lines.svg" alt="pattern-lines" class="position-absolute opacity-4 start-0">
             <div class="position-relative">
-                <img class="max-width-500 w-100 position-relative z-index-2" src="/assets/img/illustrations/chat.png" alt="chat-img">
+                <img class="max-width-500 w-100 position-relative z-index-2" src="/assets/img/illustrations/rocket-white.png" alt="chat-img">
             </div>
-            <h4 class="mt-5 text-white font-weight-bolder">"Attention is the new currency"</h4>
-            <p class="text-white">The more effortless the writing looks, the more effort the writer actually put into the process.</p>
+            <h4 class="mt-5 text-white font-weight-bolder">"Your journey starts here"</h4>
+            <p class="text-white">
+                In just a few seconds you'll have your business digitalized
+            </p>
         </div>
     </div>
 </div>

@@ -40,8 +40,7 @@ class RegisterAction
     private function validate(array $input)
     {
         return Validator::make($input, [
-            'first_name' => ['required', 'string', 'min:2', 'max:50'],
-            'last_name' => ['required', 'string', 'min:2', 'max:50'],
+            'name' => ['required', 'string', 'min:2', 'max:50'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:5', 'max:255', 'confirmed'],
         ])->validate();
