@@ -27,41 +27,40 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-8 m-auto">
-                        <form class="multisteps-form__form" style="height: 463px;">
-
-                            <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
-                                <div class="row text-center">
-                                    <div class="col-12 mx-auto">
-                                        <h5 class="font-weight-normal">Let's start with the basic information</h5>
-                                        <p>Let us know your name and email address. Use an address you don't mind other users contacting you at</p>
+                        <div class="row text-center">
+                            <div class="col-12 mx-auto">
+                                <h5 class="font-weight-normal">Let's start with the basic information</h5>
+                                <p>Let us know your name and email address. Use an address you don't mind other users contacting you at</p>
+                            </div>
+                            <div class="card">
+                                <div class="card-body text-start">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Business Name</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Business Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Country</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>Netherlands</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Language</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>Dutch / Nederlands</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Timezone</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>Europe/Amsterdam</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="multisteps-form__content">
-                                    <div class="row mt-3">
-                                        <div class="col-12 col-sm-4">
-                                            <div class="avatar avatar-xxl position-relative">
-                                                <img src="https://demos.creative-tim.com/test/soft-ui-dashboard-pro/assets/img/team-2.jpg" class="border-radius-md">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon-only bg-gradient-light position-absolute bottom-0 end-0 mb-n2 me-n2">
-                                                    <i class="fa fa-pen top-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" aria-hidden="true" data-bs-original-title="Edit Image" aria-label="Edit Image"></i><span class="sr-only">Edit Image</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-8 mt-4 mt-sm-0 text-start">
-                                            <label>First Name</label>
-                                            <input class="multisteps-form__input form-control mb-3" type="text" placeholder="Eg. Michael">
-                                            <label>Last Name</label>
-                                            <input class="multisteps-form__input form-control mb-3" type="text" placeholder="Eg. Tomson">
-                                            <label>Email Address</label>
-                                            <input class="multisteps-form__input form-control" type="email" placeholder="Eg. soft@dashboard.com">
-                                        </div>
-                                    </div>
-                                    <div class="button-row d-flex mt-4">
-                                        <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
-                                    </div>
+                                <div class="card-footer text-end">
+                                    <button class="btn bg-gradient-dark">Next</button>
                                 </div>
                             </div>
-
-                        </form>
                     </div>
                 </div>
             </div>
