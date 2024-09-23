@@ -19,6 +19,7 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.1.1" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -34,6 +35,7 @@
 <script src="/assets/js/core/bootstrap.min.js"></script>
 <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+@yield('scripts')
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

@@ -21,7 +21,7 @@ class LoginForm extends Component
             'remember' => $this->remember,
         ]);
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 
     public function render()

@@ -21,7 +21,7 @@ class LoginAction
             return;
         } else {
             throw ValidationException::withMessages([
-                'email' => 'Email or password is incorrect',
+                'password' => 'Email or password is incorrect',
             ]);
         }
     }

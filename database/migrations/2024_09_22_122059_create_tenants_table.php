@@ -15,6 +15,13 @@ return new class extends Migration {
             $table->string('language');
             $table->string('country');
             $table->string('timezone');
+            $table->enum('clock', ['12', '24'])->default('24');
+            $table->string('address')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('region')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

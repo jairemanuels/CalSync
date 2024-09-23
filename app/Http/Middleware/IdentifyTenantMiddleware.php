@@ -12,9 +12,17 @@ class IdentifyTenantMiddleware
     {
         $user = auth()->user();
 
-        if (!Tenant::where('user_id', $user->id)->exists()) {
-            return redirect()->route('setup.create');
+        if(!$user) {
+            return redirect()->route('login');
         }
+
+        $tenant = Tenant::where('user_id', $user->id)->first();
+
+        if (!$tenant) {
+            return redirect()->route('projects.create');
+        }
+
+        $request->merge(['tenant' => $tenant]);
 
         return $next($request);
     }

@@ -16,14 +16,20 @@ class RegisterForm extends Component
 
     public function handleRegistration(RegisterAction $action)
     {
-        $action->create([
+        $user = $action->create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
             'password_confirmation' => $this->password_confirmation,
         ]);
 
-        return redirect()->route('login');
+        if (!$user) {
+            return;
+        }
+
+        auth()->login($user);
+
+        return redirect()->route('projects.create');
     }
 
     public function render()

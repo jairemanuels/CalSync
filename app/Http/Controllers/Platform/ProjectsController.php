@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Platform;
 
 use App\Http\Controllers\Controller;
 
-class SetupController extends Controller
+class ProjectsController extends Controller
 {
     public function create()
     {
-        return view('platform::setup.create');
+        return view('platform::projects.create');
     }
 }

@@ -14,7 +14,21 @@ class Tenant extends Model
         'language',
         'country',
         'timezone',
+        'clock',
+        'address',
+        'address2',
+        'region',
+        'city',
+        'zip_code',
+        'is_active',
     ];
+
+    public function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+        ];
+    }
 
     public function user(): BelongsTo
     {

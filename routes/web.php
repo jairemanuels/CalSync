@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Platform\SetupController;
+use App\Http\Controllers\Platform\ProjectsController;
 
 Route::middleware(['web', 'auth'])->group(function () {
-    Route::get('/setup/create', [SetupController::class, 'create'])->name('setup.create');
+    Route::get('/projects/create', [ProjectsController::class, 'create'])->name('projects.create');
 });
 
-Route::get('/', function () {
-    return view('platform::index');
+Route::middleware(['web', 'auth', 'tenant'])->group(function () {
+    Route::get('/', function () {
+        return view('platform::index');
+    });
 });
