@@ -5,24 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Tenant extends Model
+class CustomerNote extends Model
 {
-    protected $table = 'tenants';
+    protected $table = 'customer_notes';
 
     protected $fillable = [
-        'name',
+        'customer_id',
         'user_id',
-        'domain',
-        'language',
-        'country',
-        'timezone',
-        'clock',
-        'address',
-        'address2',
-        'region',
-        'city',
-        'zip_code',
-        'is_active',
+        'note',
     ];
 
     /**
@@ -32,13 +22,21 @@ class Tenant extends Model
      */
     protected function casts(): array
     {
-        return [
-            'is_active' => 'boolean',
-        ];
+        return [];
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
     }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getNoteAttribute($value)
+    {
+        return nl2br($value);
     }
 }
