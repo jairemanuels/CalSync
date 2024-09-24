@@ -6,6 +6,7 @@
 @section('content')
 <div class="row">
     <div class="col-12">
+        @livewire('platform.add-event-modal')
         <div class="card card-calendar">
             <div class="card-body p-3">
                 <div class="calendar" data-bs-toggle="calendar" id="calendar"></div>
@@ -25,76 +26,17 @@
         },
         selectable: true,
         editable: true,
-        initialDate: '2020-12-01',
-        events: [{
-            title: 'Call with Dave',
-            start: '2020-11-18',
-            end: '2020-11-18',
-            className: 'bg-gradient-danger'
-        },
-
+        firstDay: 1,
+        initialDate: '{{ now()->format("Y-m-d") }}',
+        events: [
+            @foreach(auth()->user()->events as $event)
             {
-                title: 'Lunch meeting',
-                start: '2020-11-21',
-                end: '2020-11-22',
-                className: 'bg-gradient-warning'
-            },
-
-            {
-                title: 'All day conference',
-                start: '2020-11-29',
-                end: '2020-11-29',
-                className: 'bg-gradient-success'
-            },
-
-            {
-                title: 'Meeting with Mary',
-                start: '2020-12-01',
-                end: '2020-12-01',
+                title: '{{ $event->description }}',
+                start: '{{ $event->starts_at->format("Y-m-d H:i:s") }}',
+                end: '{{ $event->ends_at->format("Y-m-d H:i:s") }}',
                 className: 'bg-gradient-info'
             },
-
-            {
-                title: 'Winter Hackaton',
-                start: '2020-12-03',
-                end: '2020-12-03',
-                className: 'bg-gradient-danger'
-            },
-
-            {
-                title: 'Digital event',
-                start: '2020-12-07',
-                end: '2020-12-09',
-                className: 'bg-gradient-warning'
-            },
-
-            {
-                title: 'Marketing event',
-                start: '2020-12-10',
-                end: '2020-12-10',
-                className: 'bg-gradient-primary'
-            },
-
-            {
-                title: 'Dinner with Family',
-                start: '2020-12-19',
-                end: '2020-12-19',
-                className: 'bg-gradient-danger'
-            },
-
-            {
-                title: 'Black Friday',
-                start: '2020-12-23',
-                end: '2020-12-23',
-                className: 'bg-gradient-info'
-            },
-
-            {
-                title: 'Cyber Week',
-                start: '2020-12-02',
-                end: '2020-12-02',
-                className: 'bg-gradient-warning'
-            },
+            @endforeach
 
         ],
         views: {

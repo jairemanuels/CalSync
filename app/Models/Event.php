@@ -10,6 +10,7 @@ class Event extends Model
     protected $table = 'events';
 
     protected $fillable = [
+        'user_id',
         'tenant_id',
         'customer_id',
         'description',
@@ -48,6 +49,11 @@ class Event extends Model
         static::creating(function ($model) {
             $model->id = modelId();
         });
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function tenant(): BelongsTo

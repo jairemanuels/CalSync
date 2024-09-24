@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Tenant::class, 'active_tenant_id');
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
