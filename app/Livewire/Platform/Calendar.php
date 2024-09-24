@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Livewire\Platform;
+
+use App\Actions\Platform\Events\CreateEventAction;
+use Livewire\Component;
+use App\Models\Event;
+
+class Calendar extends Component
+{
+    #[On('event.created')]
+    public function render()
+    {
+        return view('platform::livewire.calendar');
+    }
+}

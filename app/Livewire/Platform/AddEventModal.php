@@ -26,6 +26,8 @@ class AddEventModal extends Component
             'all_day' => $this->allDay,
             'color' => 'info',
         ]);
+
+        $this->dispatch('event.created');
     }
 
     public function render()
