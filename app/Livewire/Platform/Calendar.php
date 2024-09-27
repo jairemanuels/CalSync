@@ -13,4 +13,18 @@ class Calendar extends Component
     {
         return view('platform::livewire.calendar');
     }
+
+
+
+    public function saveEvent($event)
+    {
+        $eventModel = Event::where('customter_id', $event['customer_id'])->first();
+        if ($eventModel) {
+            $eventModel->start = $event['start'];
+            $eventModel->end = $event['end'];
+            $eventModel->save();
+        } else {
+            // Handle the case where no event with the given user_id was found
+        }
+    }
 }

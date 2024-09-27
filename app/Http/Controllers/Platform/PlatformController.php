@@ -8,11 +8,19 @@ class PlatformController extends Controller
 {
     public function index()
     {
-        return view('platform::index');
+        $user = auth()->user();
+        return view('platform::index', ['user' => $user]);
     }
 
     public function customers()
     {
-        return view('platform::customers.index');
+        $user = auth()->user();
+        return view('platform::customers.index', ['user' => $user]);
+    }
+
+    public function events()
+    {
+        $user = auth()->user();
+        return view('platform::events.index', ['user' => $user]);
     }
 }

@@ -16,4 +16,7 @@ Route::middleware(['web', 'auth', 'tenant'])->group(function () {
         Route::get('/', [PlatformController::class, 'customers'])->name('platform.customers.index');
     });
 
+    Route::prefix('/events')->group(function () {
+        Route::get('/', [PlatformController::class, 'events'])->name('platform.events.index');
+    });
 });

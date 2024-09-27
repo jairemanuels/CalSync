@@ -17,16 +17,16 @@
             selectable: true,
             editable: true,
             firstDay: 1,
-            initialDate: '{{ now()->format("Y-m-d") }}',
+            initialDate: '{{ now()->format('Y-m-d') }}',
             events: [
-                @foreach(auth()->user()->events as $event)
+                @foreach (auth()->user()->events as $event)
 
-                {
-                    title: '{{ $event->description }}',
-                    start: '{{ $event->starts_at->format("Y-m-d H:i:s") }}',
-                    end: '{{ $event->ends_at->format("Y-m-d H:i:s") }}',
-                    className: 'bg-gradient-info'
-                },
+                    {
+                        title: '{{ $event->description }}',
+                        start: '{{ $event->starts_at->format('Y-m-d H:i:s') }}',
+                        end: '{{ $event->ends_at->format('Y-m-d H:i:s') }}',
+                        className: 'bg-gradient-info'
+                    },
                 @endforeach
 
             ],
@@ -55,5 +55,29 @@
         });
 
         calendar.render();
+
+        //when someone drags and drops event we need to save it in our model with an evetnlistener
+        calendar.on('eventDrop', function(info) {
+            var userId = info.event.extendedProps.customerId; // Adjust this line to get the user_id from the event
+            var start = info.event.start.toISOString();
+            var end = info.event.end ? info.event.end.toISOString() : null;
+            @this.call('saveEvent', {
+                customer_id: customer_id,
+                start_time: start,
+                end_time: end
+            });
+        });
+
+        calendar.on('eventResize', function(info) {
+            var id = info.event.id;
+            var start = info.event.start.toISOString();
+            var end = info.event.end ? info.event.end.toISOString() : null;
+            @this.call('saveEvent', {
+                customer_id: customer_id,
+                start_time: start,
+                end_time: end
+            });
+        });
     </script>
+
 </div>

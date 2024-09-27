@@ -201,7 +201,7 @@
                                     </x-platform::button>
                                 </div>
                                 <div class="col">
-                                    <x-platform::button color="danger" class="w-100" wire:confirm="Are you sure you want to delete this user?" wire:click="deleteItems()" data-bs-dismiss="modal">
+                                    <x-platform::button color="danger" class="w-100" wire:confirm="Are you sure you want to delete this appointment?" wire:click="deleteItems()" data-bs-dismiss="modal">
                                         Delete {{ count($selectedItems) }} items
                                     </x-platform::button>
                                 </div>

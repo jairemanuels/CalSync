@@ -65,4 +65,12 @@ class Event extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function scopeSearch($query, string $search): void{
+
+        if ($search) {
+            $query->where('description', 'like', '%' . $search . '%');
+        }
+    }
+
 }
