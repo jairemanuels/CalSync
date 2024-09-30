@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->foreignId('customer_id')->nullable()->constrained()->onDelete('set null');
             $table->string('description');
             $table->timestamp('starts_at');
-            $table->timestamp('ends_at');
+            $table->timestamp('ends_at')->nullable();
             $table->boolean('all_day')->default(false);
             $table->string('color')->default('blue');
             $table->timestamps();

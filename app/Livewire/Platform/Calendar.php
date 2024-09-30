@@ -3,28 +3,30 @@
 namespace App\Livewire\Platform;
 
 use App\Actions\Platform\Events\CreateEventAction;
+use Livewire\Attributes\Renderless;
 use Livewire\Component;
 use App\Models\Event;
 
 class Calendar extends Component
 {
-    #[On('event.created')]
     public function render()
     {
         return view('platform::livewire.calendar');
     }
 
-
-
-    public function saveEvent($event)
+    public function refreshCalender()
     {
-        $eventModel = Event::where('customter_id', $event['customer_id'])->first();
-        if ($eventModel) {
-            $eventModel->starts_at = $event['start'];
-            $eventModel->ends_at = $event['end'];
-            $eventModel->save();
-        } else {
-            // Handle the case where no event with the given user_id was found
+        $this->dispatch('calendar:refresh');
+    }
+
+    #[Renderless]
+    public function saveEvent(Event $event, $start_time, $end_time = null)
+    {
+        if($event) {
+            $event->update([
+                'starts_at' => $start_time,
+                'ends_at' => $end_time
+            ]);
         }
     }
 }
