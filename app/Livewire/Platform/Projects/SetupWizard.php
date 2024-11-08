@@ -2,53 +2,59 @@
 
 namespace App\Livewire\Platform\Projects;
 
-use Illuminate\Validation\ValidationException;
-use Livewire\Attributes\Url;
+use App\Models\Event;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use App\Actions\Platform\Setup\CreateTenantAction;
+use App\Models\Team;
+use App\Models\TeamMember;
 
 class SetupWizard extends Component
 {
+    #[Validate('required|min:3')]
     public $name = '';
 
-    public $domain = '';
+    #[Validate('nullable|max:255')]
+    public $description = '';
 
+    #[Validate('required')]
+    public $private = true;
+
+    #[Validate('required')]
+    public $collaborative = false;
+
+    #[Validate('required')]
     public $timezone = 'Europe/Amsterdam';
 
-    public $language = 'en';
-
+    #[Validate('required')]
     public $clock = '24';
 
-    public $address = '';
 
-    public $address2 = '';
-
-    public $country = 'NL';
-
-    public $region = '';
-
-    public $city = '';
-
-    public $zip_code = '';
-
-    public function createTenant(CreateTenantAction $createTenantAction)
+    public function createTeamCalendar()
     {
-        $createTenantAction->create(auth()->user(), [
+        $this->validate();
+
+        $team = Team::create([
             'name' => $this->name,
-            'domain' => $this->domain,
-            'timezone' => $this->timezone,
-            'language' => $this->language,
-            'country' => $this->country,
-            'clock' => $this->clock,
-            'address' => $this->address,
-            'address2' => $this->address2,
-            'region' => $this->region,
-            'city' => $this->city,
-            'zip_code' => $this->zip_code,
+            'description' => $this->description,
+            'is_private' => $this->private,
+            'is_collaborative' => $this->collaborative,
+            'owner_id' => auth()->id(),
         ]);
 
-        $this->redirect('/');
+        $teamMember = TeamMember::create([
+            'user_id' => auth()->id(),
+            'team_id' => $team->id,
+            'role' => 'owner',
+        ]);
+
+        // Attach personal events in shared calendar
+        $events = Event::where('user_id', auth()->id())->get();
+        foreach ($events as $event) {
+            $team->event()->attach($event->id, ['user_id' => auth()->id()]);
+        }
+        
+        // Optionally redirect or return a response
+        return redirect('/')->with('message', 'Calendar created successfully!');
     }
 
     public function render()

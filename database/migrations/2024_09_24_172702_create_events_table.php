@@ -9,14 +9,13 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
+            $table->string('external_id');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('customer_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('description');
-            $table->timestamp('starts_at');
-            $table->timestamp('ends_at');
-            $table->boolean('all_day')->default(false);
-            $table->string('color')->default('blue');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->timestamp('event_time_start')->nullable();
+            $table->timestamp('event_time_end')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
     }

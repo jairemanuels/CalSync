@@ -4,10 +4,10 @@
 ])
 
 @section('content')
-<div class="row">
-    <div class="col-12">
-        @livewire('platform.add-event-modal')
-        @livewire('platform.calendar')
+    <div class="row">
+        <div class="col-12">
+            @livewire('platform.add-event-modal')
+            @livewire('platform.calendar', ['events' => $events], ['teams' => $teams])
+        </div>
     </div>
-</div>
 @endsection

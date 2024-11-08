@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Event extends Model
 {
@@ -11,13 +12,12 @@ class Event extends Model
 
     protected $fillable = [
         'user_id',
-        'tenant_id',
-        'customer_id',
+        'external_id',
+        'name',
         'description',
-        'starts_at',
-        'ends_at',
-        'all_day',
-        'color',
+        'event_time_start',
+        'event_time_end',
+        'color'
     ];
 
     /**
@@ -39,30 +39,15 @@ class Event extends Model
      */
     public $incrementing = false;
 
-    /**
-     * Set global scope to tenant
-     */
-    protected static function booted()
-    {
-        static::addGlobalScope(new \App\Scopes\TenantScope());
 
-        static::creating(function ($model) {
-            $model->id = modelId();
-        });
-    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function tenant(): BelongsTo
+    public function team(): BelongsToMany
     {
-        return $this->belongsTo(Tenant::class);
-    }
-
-    public function customer(): BelongsTo
-    {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsToMany(Team::class, 'team_events', 'event_id', 'team_id');
     }
 }

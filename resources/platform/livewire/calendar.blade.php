@@ -15,18 +15,18 @@
                 end: 'dayGridMonth timeGridWeek timeGridDay listWeek today prev,next' // will normally be on the right. if RTL, will be on the left
             },
             selectable: true,
-            editable: true,
+            editable: false,
             firstDay: 1,
-            initialDate: '{{ now()->format("Y-m-d") }}',
+            initialDate: '{{ now()->format('Y-m-d') }}',
             events: [
-                @foreach(auth()->user()->events as $event)
+                @foreach ($events as $event)
 
-                {
-                    title: '{{ $event->description }}',
-                    start: '{{ $event->starts_at->format("Y-m-d H:i:s") }}',
-                    end: '{{ $event->ends_at->format("Y-m-d H:i:s") }}',
-                    className: 'bg-gradient-info'
-                },
+                    {
+                        title: '{{ $event->name }}',
+                        start: '{{ \Carbon\Carbon::parse($event->event_time_start)->format('Y-m-d H:i:s') }}',
+                        end: '{{ \Carbon\Carbon::parse($event->event_time_end)->format('Y-m-d H:i:s') }}',
+
+                    },
                 @endforeach
 
             ],

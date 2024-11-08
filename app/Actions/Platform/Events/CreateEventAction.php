@@ -3,7 +3,7 @@
 namespace App\Actions\Platform\Events;
 
 use App\Models\Event;
-use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -14,11 +14,12 @@ class CreateEventAction
      *
      * @throws ValidationException
      */
-    public function create(Tenant $tenant, array $input): Event
+    public function create(array $input): Event
     {
-        $validated = $this->validate($tenant, $input);
+        $user = auth()->user();
+        $validated = $this->validate($user, $input);
 
-        $validated['tenant_id'] = $tenant->id;
+        $validated['user_id'] = $user->id;
         return Event::create($validated);
     }
 
@@ -27,11 +28,11 @@ class CreateEventAction
      *
      * @throws ValidationException
      */
-    public function validate(Tenant $tenant, array $input)
+    public function validate($user, array $input)
     {
-        if(!$tenant) {
+        if(!$user = auth()->user()) {
             throw ValidationException::withMessages([
-                'tenant' => 'Tenant not found',
+                'User' => 'Please login to create an event',
             ]);
         }
 

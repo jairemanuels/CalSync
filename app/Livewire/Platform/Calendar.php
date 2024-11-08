@@ -11,6 +11,7 @@ class Calendar extends Component
     #[On('event.created')]
     public function render()
     {
-        return view('platform::livewire.calendar');
+        $events = Event::query()->where('user_id', auth()->user()->id)->get();
+        return view('platform::livewire.calendar', compact('events'));
     }
 }
