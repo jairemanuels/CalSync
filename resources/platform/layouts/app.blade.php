@@ -22,6 +22,17 @@
 
 </head>
 
+@php
+
+    $TeamMember = auth()->user()->teamMember;
+    $teamNames = [];
+    foreach ($TeamMember as $teamMember) {
+        $teamNames[] = $teamMember->team->name;
+    }
+
+
+@endphp
+
 <body class="g-sidenav-show  bg-gray-100">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
         id="sidenav-main">
@@ -74,7 +85,7 @@
                         </ul>
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="/pages/dashboards/crm.html">
+                                <a class="nav-link" href="/customers">
                                     <span class="sidenav-mini-icon"> R </span>
                                     <span class="sidenav-normal"> Requests </span>
                                 </a>
@@ -152,12 +163,13 @@
 
                     <div class="collapse " id="applicationsExamples">
                         <ul class="nav ms-4 ps-3">
-                            @foreach ($teams as $team)
+                            @foreach (auth()->user()->teamMember as $team)
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->is('teams/' . $team->id . '/calendar') ? 'active' : '' }}"
-                                        href="/teams/{{ $team->id }}/calendar">
-                                        <span class="sidenav-mini-icon"> {{ substr($team->name, 0, 1) }}</span>
-                                        <span class="sidenav-normal">{{ $team->name }}</span>
+                                    <a class="nav-link {{ request()->is('teams/' . $team->team_id . '/calendar') ? 'active' : '' }}"
+                                        href="/teams/{{ $team->team_id }}/calendar">
+                                        <span class="sidenav-mini-icon"> 
+                                            {{ substr($team, 0, 1) }}</span>
+                                        <span class="sidenav-normal">{{ $team->team->name }}</span>
                                     </a>
                                 </li>
                             @endforeach

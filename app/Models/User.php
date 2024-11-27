@@ -61,4 +61,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class);
     }
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class, 'owner_id');
+    }
+
+    public function teamMember()
+    {
+        return $this->hasMany(TeamMember::class, 'user_id');
+    }
+
+    public function avatar(): string
+    {
+        return 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+    }
+
+
 }

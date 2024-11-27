@@ -61,6 +61,11 @@ class Team extends Model
         }
     }
 
+    public function requests()
+    {
+        return $this->hasMany(TeamRequest::class, 'team_id', 'id');
+    }
+
     public function isPrivate()
     {
         return $this->is_private;

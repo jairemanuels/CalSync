@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Team;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TeamMember extends Model
+
+class TeamMember extends Pivot
 {
+
+    protected $table = 'team_members';
+    
     protected $fillable = [
         'team_id',
         'user_id',
@@ -15,7 +20,7 @@ class TeamMember extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class, 'team_id');
     }
 
     public function user()

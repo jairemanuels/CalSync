@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Platform\ProjectsController;
 use App\Http\Controllers\Platform\PlatformController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\AcceptMember;
 
 Route::get('/auth/sso/google/redirect', GoogleLogin::class);
 Route::get('/auth/sso/google/callback', GoogleLoginCallback::class);
