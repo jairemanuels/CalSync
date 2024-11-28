@@ -14,8 +14,15 @@ class TeamController extends Controller
         $SelectTeam = Team::where('id', $uuid)->firstOrFail();
         $teams = Team::where('owner_id', auth()->id())->get();
         $events = $SelectTeam->event;
+        $teamMember = TeamMember::where('team_id', $SelectTeam->id)->get();
+
+        $teamMemberNames = [];
+        foreach ($teamMember as $member) {
+            $teamMemberNames[] = $member->user->name;
+        }
 
 
-        return view('platform::index', compact('teams', 'SelectTeam', 'events'));
+
+        return view('platform::index', compact('teams', 'SelectTeam', 'events', 'teamMemberNames'));
     }
 }
