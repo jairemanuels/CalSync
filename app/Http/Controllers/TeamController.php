@@ -16,13 +16,13 @@ class TeamController extends Controller
         $events = $SelectTeam->event;
         $teamMember = TeamMember::where('team_id', $SelectTeam->id)->get();
 
-        $teamMemberNames = [];
+        $teamMembers = [];
         foreach ($teamMember as $member) {
-            $teamMemberNames[] = $member->user->name;
+            $teamMembers[] = $member;
         }
 
 
 
-        return view('platform::index', compact('teams', 'SelectTeam', 'events', 'teamMemberNames'));
+        return view('platform::index', compact('teams', 'SelectTeam', 'events', 'teamMembers'));
     }
 }

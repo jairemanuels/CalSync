@@ -7,6 +7,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use App\Models\Team;
 use App\Models\TeamMember;
+use App\Services\teamMemberService;
 
 class SetupWizard extends Component
 {
@@ -28,6 +29,27 @@ class SetupWizard extends Component
     #[Validate('required')]
     public $clock = '24';
 
+    public function generateColor($teamId)
+    {
+
+        $usedColors = TeamMember::where('team_id', $teamId)->pluck('color')->filter();
+
+        $palette = [
+            '#1B1B2F', '#2F3E46', '#4D4D4D', '#8A8A8A', '#ABB2B9', '#77665E', '#ADA9A3', '#2C3E50', '#85929E'
+        ];
+
+        $palette2 = [
+            "#582f0e","#7f4f24","#936639","#a68a64","#b6ad90","#c2c5aa","#a4ac86","#656d4a","#414833","#333d29"
+        ];
+
+        $availableColors = collect($palette)->diff($usedColors);
+
+        if ($availableColors->isEmpty()) {
+            $availableColors = collect($palette2);
+        }
+
+        return $availableColors->random();
+    }
 
     public function createTeamCalendar()
     {
@@ -41,18 +63,26 @@ class SetupWizard extends Component
             'owner_id' => auth()->id(),
         ]);
 
-        $teamMember = TeamMember::create([
+        $teamId = $team->id;
+        $color = $this->generateColor($teamId);
+
+
+        TeamMember::create([
             'user_id' => auth()->id(),
             'team_id' => $team->id,
             'role' => 'owner',
+            'color' => $color,
         ]);
 
         // Attach personal events in shared calendar
         $events = Event::where('user_id', auth()->id())->get();
         foreach ($events as $event) {
-            $team->event()->attach($event->id, ['user_id' => auth()->id()]);
+            $team->event()->attach($event->id, [
+                'user_id' => auth()->id(),
+                'color' => $color,
+            ]);
         }
-        
+
         // Optionally redirect or return a response
         return redirect('/')->with('message', 'Calendar created successfully!');
     }

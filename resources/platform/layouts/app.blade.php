@@ -27,14 +27,39 @@
 
     $userTeamMember = auth()->user()->teamMember;
     $teamNames = [];
+
     foreach ($userTeamMember as $teamMember) {
         $teamNames[] = $teamMember->team->name;
     }
+
+
+
 
     $uri = $_SERVER['REQUEST_URI'];
     $currentUuid = preg_replace('#^/teams/|/calendar$#', '', $uri);
     $currentPage = preg_replace('#^/teams/' . $currentUuid . '/|/calendar$#', '', $uri);
 @endphp
+
+<!-- Success Message -->
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+<!-- Error Message 1 -->
+@if (session('error') == 'You are already part of this team.')
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+<!-- Error Message 2 -->
+@if (session('error') == 'You have already sent a request to this team. Please wait for approval.')
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
 <body class="g-sidenav-show  bg-gray-100">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
@@ -43,7 +68,7 @@
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0 text-center" href="/" target="_blank">
-                <img src="https://cdn.discordapp.com/attachments/548114515666141186/1287909403768524912/IMG_1972.png?ex=66f3429a&is=66f1f11a&hm=90cb0e5f9a36658501bad35988def1b462833d5a8cec7724a2c247aa3080fec7&"
+                <img src="/assets/img/main_logo.png"
                     class="navbar-brand-img h-100" alt="main_logo">
             </a>
         </div>
@@ -254,14 +279,14 @@
 
                         <span class="nav-link-text ms-1">Members</span>
                     </a>
-                    <div class="collapse " id="basicExamples">
-                        @foreach($teamMemberNames as $member)
+                    <div class="collapse" id="basicExamples">
+                        @foreach($teamMembers as $member)
                         <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false"
+                            <li class="nav-item p-1 m-1 rounded" style="background-color:{{$member->color}};">
+                                <a class="nav-link" data-bs-toggle="collapse" aria-expanded="false"
                                     href="#gettingStartedExample">
-                                    <span class="sidenav-mini-icon"> {{ substr($member, 0, 1) }}</span>
-                                    <span class="sidenav-normal"> {{ $member }}<b class="caret"></b></span>
+                                    <span class="sidenav-mini-icon"> {{ substr($member->user->name, 0, 1) }}</span>
+                                    <span class="sidenav-normal text-white"> {{ $member->user->name }}<b class="caret"></b></span>
                                 </a>
                             </li>
                         </ul>

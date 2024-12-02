@@ -25,11 +25,14 @@
                         title: '{{ $event->name }}',
                         start: '{{ \Carbon\Carbon::parse($event->event_time_start)->format('Y-m-d H:i:s') }}',
                         end: '{{ \Carbon\Carbon::parse($event->event_time_end)->format('Y-m-d H:i:s') }}',
-
                     },
+
                 @endforeach
 
             ],
+
+            eventColor: '#333a5b',
+
             views: {
                 month: {
                     titleFormat: {

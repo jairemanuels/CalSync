@@ -11,11 +11,12 @@ class TeamMember extends Pivot
 {
 
     protected $table = 'team_members';
-    
+
     protected $fillable = [
         'team_id',
         'user_id',
         'role',
+        'color',
     ];
 
     public function team()
@@ -26,5 +27,10 @@ class TeamMember extends Pivot
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function teamRequest()
+    {
+        return $this->hasMany(TeamEvents::class);
     }
 }

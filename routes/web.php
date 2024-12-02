@@ -8,6 +8,7 @@ use App\Http\Controllers\Platform\ProjectsController;
 use App\Http\Controllers\Platform\PlatformController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\AcceptMember;
+use App\Http\Controllers\TeamRequestController;
 
 Route::get('/auth/sso/google/redirect', GoogleLogin::class);
 Route::get('/auth/sso/google/callback', GoogleLoginCallback::class);
@@ -15,6 +16,8 @@ Route::get('/auth/sso/google/callback', GoogleLoginCallback::class);
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/projects/create', [ProjectsController::class, 'create'])->name('projects.create');
     Route::get('/teams/{uuid}/calendar', [TeamController::class, 'showCalendar'])->name('teams.calendar');
+    Route::get('/teams/{uuid}/request-access', [TeamRequestController::class, 'createRequest'])->name('teams.requests');
+
 
 });
 

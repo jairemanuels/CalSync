@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Team;
 use App\Models\TeamMember;
+use App\Services\teamMemberService;
 
 class PlatformController extends Controller
 {
+
     public function index()
     {
         // $uri = $_SERVER['REQUEST_URI'];
@@ -19,20 +21,20 @@ class PlatformController extends Controller
         $teams = Team::where('owner_id', auth()->id())->get();
         // $teamMember = TeamMember::where('team_id', $SelectTeam->id)->get();
 
-        $teamMemberNames = [];
+        $teamMembers = [];
 
 
 
 
         return view(
             'platform::index',
-            compact('events', 'teams', 'teamMemberNames'),
+            compact('events', 'teams', 'teamMembers'),
 
         );
     }
 
     public function customers()
     {
-        return view('platform::customers.index', ['teamMemberNames' => []]);
+        return view('platform::customers.index', ['teamMembers' => []]);
     }
 }
