@@ -13,7 +13,6 @@ class AcceptMember extends Controller
     public function accept($requestId)
     {
         $request = TeamRequest::findOrFail($requestId);
-        dd($request->teamMember->color);
 
         $events = Event::where($request->user_id, 'user_id');
 

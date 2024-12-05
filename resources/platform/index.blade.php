@@ -3,11 +3,12 @@
     'activePage' => 'platform',
 ])
 
+
 @section('content')
     <div class="row">
         <div class="col-12">
-            @livewire('platform.add-event-modal')
-            @livewire('platform.calendar', ['events' => $events], ['teams' => $teams])
+            @livewire('platform.calendar', ['teams' => $teams, 'teamEvents' => $teamEvents])
         </div>
     </div>
 @endsection
+å

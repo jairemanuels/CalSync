@@ -6,6 +6,7 @@ use App\Models\Event;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use App\Models\Team;
+use App\Models\TeamEvents;
 use App\Models\TeamMember;
 use App\Services\teamMemberService;
 
@@ -74,14 +75,23 @@ class SetupWizard extends Component
             'color' => $color,
         ]);
 
-        // Attach personal events in shared calendar
-        $events = Event::where('user_id', auth()->id())->get();
-        foreach ($events as $event) {
-            $team->event()->attach($event->id, [
-                'user_id' => auth()->id(),
+        foreach (auth()->user()->events as $event) {
+            TeamEvents::create([
+                'team_id' => $teamId,
+                'event_id' => $event->id,
                 'color' => $color,
+                'user_id' => auth()->id(),
             ]);
         }
+
+        // // Attach personal events in shared calendar
+        // $events = Event::where('user_id', auth()->id())->get();
+        // foreach ($events as $event) {
+        //     $team->event()->attach($event->id, [
+        //         'user_id' => auth()->id(),
+        //         'color' => $color,
+        //     ]);
+        // }
 
         // Optionally redirect or return a response
         return redirect('/')->with('message', 'Calendar created successfully!');

@@ -25,7 +25,6 @@ class teamMemberService
         // diff() haalt alle kleuren eruit die al gebruikt zijn
         // Resultaat: alleen de kleuren die nog niet zijn gebruikt
         $availableColors = collect($palette)->diff($usedColors);
-        dd($availableColors);
 
         // Als alle kleuren zijn gebruikt, reset dan het beschikbare palet
         // Dit zorgt ervoor dat we opnieuw kunnen beginnen met kleuren toewijzen

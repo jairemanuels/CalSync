@@ -13,9 +13,11 @@ class RequestTable extends Component
     public function accept($requestId)
     {
         $request = TeamRequest::with('teamMember')->findOrFail($requestId);
-
         $events = Event::where('user_id', $request->user_id)->get();
-        $userColor = teamMember::where('user_id', $request->user_id)->pluck('color')->first();
+
+        $request->accept();
+
+        $userColor = TeamMember::where('user_id', $request->user_id)->pluck('color')->first();
 
         // plaats events in team_events met unieke kleur van user
         foreach ($events as $event) {
@@ -27,7 +29,6 @@ class RequestTable extends Component
             ]);
         }
 
-        $request->accept();
     }
 
     public function decline($requestId)

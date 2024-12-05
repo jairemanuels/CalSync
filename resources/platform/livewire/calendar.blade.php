@@ -5,6 +5,9 @@
         </div>
     </div>
 
+    @dd($teamEvents);
+
+    <link href="/assets/css/plugins/fullcalendar.min.css" rel="stylesheet">
     <script src="/assets/js/plugins/fullcalendar.min.js"></script>
     <script>
         var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
@@ -19,12 +22,13 @@
             firstDay: 1,
             initialDate: '{{ now()->format('Y-m-d') }}',
             events: [
-                @foreach ($events as $event)
+                @foreach ($teamEvents as $event)
 
                     {
-                        title: '{{ $event->name }}',
-                        start: '{{ \Carbon\Carbon::parse($event->event_time_start)->format('Y-m-d H:i:s') }}',
-                        end: '{{ \Carbon\Carbon::parse($event->event_time_end)->format('Y-m-d H:i:s') }}',
+                        title: '{{ $event->team->name }}',
+                        start: '{{ \Carbon\Carbon::parse($event->team->event_time_start)->format('Y-m-d H:i:s') }}',
+                        end: '{{ \Carbon\Carbon::parse($event->team->event_time_end)->format('Y-m-d H:i:s') }}',
+                        color: '{{ $event->color }}',
                     },
 
                 @endforeach
