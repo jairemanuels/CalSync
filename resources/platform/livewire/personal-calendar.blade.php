@@ -5,7 +5,6 @@
         </div>
     </div>
 
-
     <link href="/assets/css/plugins/fullcalendar.min.css" rel="stylesheet">
     <script src="/assets/js/plugins/fullcalendar.min.js"></script>
     <script>
@@ -20,40 +19,21 @@
             editable: false,
             firstDay: 1,
             initialDate: '{{ now()->format('Y-m-d') }}',
+            events: [
+                @foreach (user()->auth()->events as $event)
 
-            @if (Route::current()->uri === '/')
+                    {
+                        title: '{{ $event->team->name }}',
+                        start: '{{ \Carbon\Carbon::parse($event->team->event_time_start)->format('Y-m-d H:i:s') }}',
+                        end: '{{ \Carbon\Carbon::parse($event->team->event_time_end)->format('Y-m-d H:i:s') }}',
+                        // color: '{{ $event->color }}',
+                    },
 
-                events: [
-                    @foreach (auth()->user()->events as $event)
+                @endforeach
 
-                        {
-                            title: '{{ $event->name }}',
-                            start: '{{ \Carbon\Carbon::parse($event->event_time_start)->format('Y-m-d H:i:s') }}',
-                            end: '{{ \Carbon\Carbon::parse($event->event_time_end)->format('Y-m-d H:i:s') }}',
-                            textColor: '#000000'
-                        },
-                    @endforeach
+            ],
 
-                ],
-            @else
-                events: [
-                    @foreach ($teamEvents as $event)
-
-                        {
-                            title: '{{ $event->event->name }}',
-                            start: '{{ \Carbon\Carbon::parse($event->event->event_time_start)->format('Y-m-d H:i:s') }}',
-                            end: '{{ \Carbon\Carbon::parse($event->event->event_time_end)->format('Y-m-d H:i:s') }}',
-                            color: '{{ $event->color }}',
-                            textColor: '#000000'
-                        },
-                    @endforeach
-
-                ],
-            @endif
-
-
-            color: '#333a5b',
-            textColor: '#000000',
+            eventColor: '#333a5b',
 
             views: {
                 month: {

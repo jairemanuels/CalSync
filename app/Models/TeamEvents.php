@@ -13,6 +13,8 @@ class TeamEvents extends Model
         'event_id',
         'color',
         'user_id',
+        'start_time',
+        'end_time',
     ];
 
     public function team()

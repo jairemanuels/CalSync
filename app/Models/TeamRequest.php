@@ -49,13 +49,12 @@ class TeamRequest extends Model
         $usedColors = TeamMember::where('team_id', $teamId)->pluck('color')->filter();
 
         $palette = [
-            '#1B1B2F', '#2F3E46', '#4D4D4D', '#8A8A8A', '#ABB2B9', '#77665E', '#ADA9A3', '#2C3E50', '#85929E'
+            "#c4cea1","#d9e0a3","#fdf2b0","#f3d17c","#cf9963"
         ];
 
         $palette2 = [
-            "#582f0e","#7f4f24","#936639","#a68a64","#b6ad90","#c2c5aa","#a4ac86","#656d4a","#414833","#333d29"
+            "#ffc8dd","#ffafcc","#bdb2ff","#bde0fe","#a2d2ff"
         ];
-
         $availableColors = collect($palette)->diff($usedColors);
 
         if ($availableColors->isEmpty()) {
