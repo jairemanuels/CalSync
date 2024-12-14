@@ -5,6 +5,9 @@
         </div>
     </div>
 
+    @php
+    $events = Route::current()->uri() === '/' ? auth()->user()->events : $teamEvents;
+    @endphp
 
     <link href="/assets/css/plugins/fullcalendar.min.css" rel="stylesheet">
     <script src="/assets/js/plugins/fullcalendar.min.js"></script>
@@ -19,24 +22,11 @@
             selectable: true,
             editable: false,
             firstDay: 1,
-            initialDate: '{{ now()->format('Y-m-d') }}',
+            initialDate: '{{ now()->format("Y-m-d") }}',
 
-            @if (Route::current()->uri === '/')
+            @if (Route::current()->uri === 'teams/{uuid}/calendar')
 
-                events: [
-                    @foreach (auth()->user()->events as $event)
-
-                        {
-                            title: '{{ $event->name }}',
-                            start: '{{ \Carbon\Carbon::parse($event->event_time_start)->format('Y-m-d H:i:s') }}',
-                            end: '{{ \Carbon\Carbon::parse($event->event_time_end)->format('Y-m-d H:i:s') }}',
-                            textColor: '#000000'
-                        },
-                    @endforeach
-
-                ],
-            @else
-                events: [
+            events: [
                     @foreach ($teamEvents as $event)
 
                         {
@@ -44,7 +34,22 @@
                             start: '{{ \Carbon\Carbon::parse($event->event->event_time_start)->format('Y-m-d H:i:s') }}',
                             end: '{{ \Carbon\Carbon::parse($event->event->event_time_end)->format('Y-m-d H:i:s') }}',
                             color: '{{ $event->color }}',
-                            textColor: '#000000'
+                            textColor: '#ffffff',
+                        },
+                    @endforeach
+
+                ],
+
+            @elseif (Route::current()->uri === '/')
+
+            events: [
+                    @foreach (auth()->user()->events as $event)
+
+                        {
+                            title: '{{ $event->name }}',
+                            start: '{{ \Carbon\Carbon::parse($event->event_time_start)->format('Y-m-d H:i:s') }}',
+                            end: '{{ \Carbon\Carbon::parse($event->event_time_end)->format('Y-m-d H:i:s') }}',
+                            textColor: '#000000',
                         },
                     @endforeach
 
@@ -53,7 +58,7 @@
 
 
             color: '#333a5b',
-            textColor: '#000000',
+
 
             views: {
                 month: {

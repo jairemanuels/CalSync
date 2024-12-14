@@ -240,6 +240,7 @@
 
 
                 </li>
+                @if($currentPage === 'calendar')
 
                 <li class="nav-item">
                     <hr class="horizontal dark" />
@@ -292,6 +293,7 @@
                         </ul>
                         @endforeach
                     </div>
+                    @endif
                 </li>
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link "

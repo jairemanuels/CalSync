@@ -28,6 +28,6 @@ class PlatformController extends Controller
 
     public function customers()
     {
-        return view('platform::customers.index', ['teamMembers' => []], ['teamEvents' => []]);
+        return view('platform::customers.index', ['teamMembers'], ['teamEvents']);
     }
 }
